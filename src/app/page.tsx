@@ -6,6 +6,7 @@ import { FileDropZone } from "@/components/csv-importer/FileDropzone";
 import { DataTable } from "@/components/csv-importer/DataTable";
 import { StatCard } from "@/components/csv-importer/StatCard";
 import { ImportResult, Stage } from "@/server/types/import";
+import { ThemeToggle } from "@/components/theme/ThemeToggle";
 export default function CsvImportPage() {
   const [stage, setStage] = useState<Stage>("upload");
   const [file, setFile] = useState<File | null>(null);
@@ -98,6 +99,7 @@ export default function CsvImportPage() {
           <p className="text-sm text-gray-500">
             Upload any lead export. AI maps it to GrowEasy&apos;s CRM format automatically.
           </p>
+          <ThemeToggle/>
         </header>
 
         <StepIndicator stage={stage} />

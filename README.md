@@ -129,11 +129,16 @@ The AI extraction prompt enforces the following, regardless of input column name
 - Gemini's free tier (`gemini-2.0-flash`) has a modest requests-per-minute limit. Very large CSVs (many batches) may take longer to process or occasionally retry due to rate limiting; the extraction service backs off and retries automatically, and any batch that ultimately fails is marked as skipped rather than failing the whole import.
 - No authentication layer is included — this is a scoped assignment deliverable, not a multi-tenant production app.
 
-## Roadmap / Not Yet Included
 
-- [ ] Docker setup for local reproducibility (see below — added separately)
-- [ ] Deployment instructions (Vercel + MongoDB Atlas)
+## Dark Mode
 
----
+Toggle via the icon in the header. Implemented with `next-themes`, which reads system preference by default and persists the user's choice — a blocking script in `<head>` prevents a flash of the wrong theme on load.
 
-*Docker setup and deployment instructions will be appended to this README in a follow-up update.*
+## Docker
+
+```bash
+# .env with GEMINI_API_KEY=... required in project root first
+docker compose up --build
+```
+
+This spins up the app (multi-stage build using Next.js `standalone` output) alongside a MongoDB container on a shared Docker network, with data persisted in a named volume. This is for local reproducibility — the primary deployment target is Vercel + MongoDB Atlas, which does not use the Dockerfile.
